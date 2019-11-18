@@ -18,7 +18,6 @@ com\netcracker\eductr\tasks\tests\model\TaskListFactory.class
 com\netcracker\eductr\tasks\tests\T6_StreamAPITest.class
 com\netcracker\eductr\tasks\tests\model\TaskCreator.class
 com\netcracker\eductr\tasks\tests\T7_TasksTest.class
-com\netcracker\eductr\tasks\tests\utils\EqualsUtil.class
 com\netcracker\eductr\tasks\tests\T5_TaskCloneTest.class
 com\netcracker\eductr\tasks\tests\model\BaseObject.class
 com\netcracker\eductr\tasks\tests\T1_TaskTest2.class
@@ -35,5 +34,3 @@ com\netcracker\eductr\tasks\tests\T8_TaskIOTest.class
 com\netcracker\eductr\tasks\tests\utils\ClassFinder.class
 com\netcracker\eductr\tasks\tests\model\Tasks.class
 com\netcracker\eductr\tasks\tests\model\TaskListCreator.class
-com\netcracker\eductr\tasks\tests\T5_LinkedTaskListIteratorTest.class
-com\netcracker\eductr\tasks\tests\utils\TaskListUtils.class

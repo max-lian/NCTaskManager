@@ -2,7 +2,7 @@ package ua.edu.sumdu.j2se.yakovlev.tasks;
 
 import java.util.Objects;
 
-public class Task {
+public class Task{
     private String title;
     private int time;
     private int interval;
@@ -11,13 +11,19 @@ public class Task {
     private boolean repeat;
     private boolean active = false;
 
-    public Task(String title, int time) {
+    public Task(String title, int time) throws IllegalArgumentException {
+        if(time < 0){
+            throw new IllegalArgumentException();
+        }
         this.title = title;
         this.time = time;
         repeat = false;
     }
 
-    public Task(String title, int start, int end, int interval) {
+    public Task(String title, int start, int end, int interval) throws IllegalArgumentException {
+        if(start < 0 || end < 0 || interval <= 0 ){
+            throw new IllegalArgumentException();
+        }
         this.title = title;
         this.interval = interval;
         this.start = start;
@@ -50,7 +56,10 @@ public class Task {
         }
     }
 
-    public void setTime(int time) {
+    public void setTime(int time) throws IllegalArgumentException{
+        if(time < 0){
+            throw new IllegalArgumentException();
+        }
         repeat = false;
         this.time = time;
     }
@@ -82,7 +91,10 @@ public class Task {
         }
     }
 
-    public void setTime(int start, int end, int interval) {
+    public void setTime(int start, int end, int interval) throws IllegalArgumentException {
+        if(start < 0 || end < 0 || interval <= 0 ){
+            throw new IllegalArgumentException();
+        }
         repeat = true;
         this.start = start;
         this.end = end;
@@ -144,5 +156,18 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(title, time, interval, start, end, repeat, active);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", time=" + time +
+                ", interval=" + interval +
+                ", start=" + start +
+                ", end=" + end +
+                ", repeat=" + repeat +
+                ", active=" + active +
+                '}';
     }
 }
