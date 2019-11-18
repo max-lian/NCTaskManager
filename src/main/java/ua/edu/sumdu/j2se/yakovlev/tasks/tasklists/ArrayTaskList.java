@@ -1,4 +1,7 @@
-package ua.edu.sumdu.j2se.yakovlev.tasks;
+package ua.edu.sumdu.j2se.yakovlev.tasks.tasklists;
+
+import ua.edu.sumdu.j2se.yakovlev.tasks.Task;
+
 /**
  * Класс продукции со свойствами
  * <b>maker</b> и <b>price</b>.
@@ -6,11 +9,9 @@ package ua.edu.sumdu.j2se.yakovlev.tasks;
  * @version 2.1
  */
 
-public class ArrayTaskList extends AbstractTaskList{
+public class ArrayTaskList extends AbstractTaskList {
     /** Поле массив задач */
     private Task[] taskArray;
-    /** Поле длинна */
-    private int lenght;
 
     /**
      * Конструктор - создание нового объекта
@@ -23,8 +24,8 @@ public class ArrayTaskList extends AbstractTaskList{
      * Метод для увеличения массива
      */
     private void makeArrayBigger(){
-        Task[] newTaskArray = new Task[lenght + 1];
-        for (int i = 0; i < lenght; i++){
+        Task[] newTaskArray = new Task[getLenght() + 1];
+        for (int i = 0; i < getLenght(); i++){
             newTaskArray[i] = taskArray[i];
         }
         taskArray = newTaskArray;
@@ -36,8 +37,8 @@ public class ArrayTaskList extends AbstractTaskList{
      * @return при успешном выполнении возвращает true
      */
     private boolean makeArraySmoller(int i){
-        Task[] newTaskArray = new Task[lenght - 1];
-        for (int j = 0; j < newTaskArray.length; j++){
+        Task[] newTaskArray = new Task[getLenght() - 1];
+        for (int j = 0; j < getLenght() - 1; j++){
             if( j < i){
                 newTaskArray[j] = taskArray[j];
             }
@@ -58,8 +59,8 @@ public class ArrayTaskList extends AbstractTaskList{
      */
     public void add(Task task){
         makeArrayBigger();
-        lenght++;
-        taskArray[lenght - 1] = task;
+        setLenght(getLenght() + 1);;
+        taskArray[getLenght() - 1] = task;
     }
 
     /**
@@ -71,22 +72,14 @@ public class ArrayTaskList extends AbstractTaskList{
      */
     public boolean remove(Task task){
         boolean flag = false;
-        for (int i = 0; i < taskArray.length; i++){
+        for (int i = 0; i < getLenght(); i++){
             if (taskArray[i].equals(task)){
                 flag = makeArraySmoller( i );
-                lenght--;
+                setLenght(getLenght() - 1);;
                 break;
             }
         }
         return flag;
-    }
-
-    /**
-     * Метод для получения длинны массива задач
-     * @return возвращает количество задач
-     */
-    public int size(){
-        return lenght;
     }
 
     /**
@@ -96,33 +89,9 @@ public class ArrayTaskList extends AbstractTaskList{
      * @throws IndexOutOfBoundsException метод бросает ошибку при выходе индекса за рамки
      */
     public Task getTask(int index) throws IndexOutOfBoundsException{
-        if( index < 0 || index >= lenght){
+        if( index < 0 || index >= getLenght()){
             throw new IndexOutOfBoundsException();
         }
         return taskArray[index];
-    }
-
-
-    /**
-     * Метод для поиска задач, которые запланированы для выполнения в период времени от from до to
-     * @param from - начало временного диапазона
-     * @param to - конец временного диапазона
-     * @return Возвращает подмножество активных задач, которые запланированы для выполнения в период времени от from до to
-     */
-    public ArrayTaskList incoming(int from, int to){
-        ArrayTaskList fromTo = new ArrayTaskList();
-        for(int i = 0; i < lenght; i++){
-            if(taskArray[i].isRepeated()){
-                if(taskArray[i].nextTimeAfter(from) <= to && taskArray[i].nextTimeAfter(from) != -1){
-                    fromTo.add(taskArray[i]);
-                }
-            }
-            else{
-                if(taskArray[i].getTime() > from && taskArray[i].getTime() <= to && taskArray[i].isActive()){
-                    fromTo.add(taskArray[i]);
-                }
-            }
-        }
-        return fromTo;
     }
 }

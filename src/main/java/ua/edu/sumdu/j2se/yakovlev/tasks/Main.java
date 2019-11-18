@@ -1,6 +1,6 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
-import java.util.ArrayList;
+import ua.edu.sumdu.j2se.yakovlev.tasks.tasklists.LinkedTaskList;
 
 public class Main {
 

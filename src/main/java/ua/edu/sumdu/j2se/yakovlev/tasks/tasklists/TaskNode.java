@@ -1,4 +1,6 @@
-package ua.edu.sumdu.j2se.yakovlev.tasks;
+package ua.edu.sumdu.j2se.yakovlev.tasks.tasklists;
+
+import ua.edu.sumdu.j2se.yakovlev.tasks.Task;
 
 public class TaskNode {
     private Task task;

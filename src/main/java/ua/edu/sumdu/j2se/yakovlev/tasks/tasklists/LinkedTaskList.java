@@ -1,11 +1,10 @@
-package ua.edu.sumdu.j2se.yakovlev.tasks;
+package ua.edu.sumdu.j2se.yakovlev.tasks.tasklists;
 
-import org.w3c.dom.Node;
+import ua.edu.sumdu.j2se.yakovlev.tasks.Task;
 
 public class LinkedTaskList extends AbstractTaskList {
     private TaskNode firstNode;
     private TaskNode lastNode;
-    private int lenght = 0;
 
     public LinkedTaskList() {
     }
@@ -26,16 +25,8 @@ public class LinkedTaskList extends AbstractTaskList {
         this.lastNode = lastNode;
     }
 
-    public int getLenght() {
-        return lenght;
-    }
-
-    public void setLenght(int lenght) {
-        this.lenght = lenght;
-    }
-
     public void add(Task task){
-        if (lenght == 0){
+        if (getLenght() == 0){
             lastNode = firstNode = new TaskNode(task, null, null);
         }
         else{
@@ -43,7 +34,7 @@ public class LinkedTaskList extends AbstractTaskList {
             lastNode.setRight(newTaskNode);
             lastNode = newTaskNode;
         }
-        lenght++;
+        setLenght(getLenght()+1);
     }
 
     public boolean remove(Task task){
@@ -64,16 +55,12 @@ public class LinkedTaskList extends AbstractTaskList {
                     lastNode = lastNode.getLeft();
                     lastNode.setRight(null);
                 }
-                lenght--;
+                setLenght(getLenght() - 1);;
                 return true;
             }
             listTask = listTask.getRight();
         }
         return false;
-    }
-
-    public int size(){
-        return lenght;
     }
 
     public Task getTask(int index){
@@ -84,28 +71,9 @@ public class LinkedTaskList extends AbstractTaskList {
         return listTask.getTask();
     }
 
-    public LinkedTaskList incoming(int from, int to) {
-        LinkedTaskList fromTo = new LinkedTaskList();
-        TaskNode listTask = firstNode;
-        for(int i = 0; i < lenght; i++){
-            if(listTask.getTask().isRepeated()){
-                if(listTask.getTask().nextTimeAfter(from) <= to && listTask.getTask().nextTimeAfter(from) != -1){
-                    fromTo.add(listTask.getTask());
-                }
-            }
-            else{
-                if(listTask.getTask().getTime() > from && listTask.getTask().getTime() <= to && listTask.getTask().isActive()){
-                    fromTo.add(listTask.getTask());
-                }
-            }
-            listTask = listTask.getRight();
-        }
-        return fromTo;
-    }
-
     public void printList(){
         TaskNode listTask = firstNode;
-        for(int i = 0; i < lenght; i++){
+        for(int i = 0; i < getLenght(); i++){
             System.out.println(listTask.getTask().toString());
             listTask = listTask.getRight();
         }
