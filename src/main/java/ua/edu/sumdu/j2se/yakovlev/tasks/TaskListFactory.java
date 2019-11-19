@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.yakovlev.tasks.tasklists;
+package ua.edu.sumdu.j2se.yakovlev.tasks;
 
 public class TaskListFactory {
     public static AbstractTaskList createTaskList(ListTypes.types type){

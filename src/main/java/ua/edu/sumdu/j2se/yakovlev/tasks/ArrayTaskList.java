@@ -1,6 +1,4 @@
-package ua.edu.sumdu.j2se.yakovlev.tasks.tasklists;
-
-import ua.edu.sumdu.j2se.yakovlev.tasks.Task;
+package ua.edu.sumdu.j2se.yakovlev.tasks;
 
 /**
  * Класс продукции со свойствами
@@ -93,5 +91,10 @@ public class ArrayTaskList extends AbstractTaskList {
             throw new IndexOutOfBoundsException();
         }
         return taskArray[index];
+    }
+
+    @Override
+    public AbstractTaskList createList() {
+        return new ArrayTaskList();
     }
 }

@@ -1,6 +1,4 @@
-package ua.edu.sumdu.j2se.yakovlev.tasks.tasklists;
-
-import ua.edu.sumdu.j2se.yakovlev.tasks.Task;
+package ua.edu.sumdu.j2se.yakovlev.tasks;
 
 public class LinkedTaskList extends AbstractTaskList {
     private TaskNode firstNode;
@@ -69,6 +67,11 @@ public class LinkedTaskList extends AbstractTaskList {
             listTask = listTask.getRight();
         }
         return listTask.getTask();
+    }
+
+    @Override
+    public AbstractTaskList createList() {
+        return new LinkedTaskList();
     }
 
     public void printList(){

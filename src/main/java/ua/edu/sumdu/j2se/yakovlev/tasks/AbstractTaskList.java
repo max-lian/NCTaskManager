@@ -1,9 +1,15 @@
-package ua.edu.sumdu.j2se.yakovlev.tasks.tasklists;
-
-import ua.edu.sumdu.j2se.yakovlev.tasks.Task;
+package ua.edu.sumdu.j2se.yakovlev.tasks;
 
 public abstract class AbstractTaskList {
     private int lenght;
+
+    public abstract void add(Task task);
+
+    public abstract boolean remove(Task task);
+
+    public abstract Task getTask(int index);
+
+    public abstract AbstractTaskList createList();
 
     public int getLenght() {
         return lenght;
@@ -13,18 +19,12 @@ public abstract class AbstractTaskList {
         this.lenght = lenght;
     }
 
-    public abstract void add(Task task);
-
-    public abstract boolean remove(Task task);
-
     public int size(){
         return  lenght;
     }
 
-    public abstract Task getTask(int index);
-
     public AbstractTaskList incoming(int from, int to){
-        ArrayTaskList fromTo = new ArrayTaskList();
+        AbstractTaskList fromTo = createList();
         for(int i = 0; i < lenght; i++){
             if(getTask(i).isRepeated()){
                 if(getTask(i).nextTimeAfter(from) <= to && getTask(i).nextTimeAfter(from) != -1){
@@ -39,5 +39,4 @@ public abstract class AbstractTaskList {
         }
         return fromTo;
     }
-
-    }
+}
