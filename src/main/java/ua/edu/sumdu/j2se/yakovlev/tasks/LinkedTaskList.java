@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class LinkedTaskList extends AbstractTaskList<Task> implements Iterable<TaskNode>, Cloneable{
+public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
     private TaskNode firstNode;
     private TaskNode lastNode;
 
@@ -81,7 +81,7 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Iterable<T
     }
 
     @Override
-    public Iterator<TaskNode> iterator() {
+    public Iterator<Task> iterator() {
         return new LinkedTaskListIterator();
     }
 
@@ -90,7 +90,7 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Iterable<T
         String res =  "LinkedTaskList{taskList=";
         LinkedTaskListIterator iterator = (LinkedTaskListIterator) iterator();
         while (iterator.hasNext()){
-            res = res + iterator.next().getTask().toString();
+            res = res + iterator.next().toString();
         }
         res = res + "}";
         return res;
@@ -132,7 +132,7 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Iterable<T
         return Objects.hash(firstNode, lastNode);
     }
 
-    public class LinkedTaskListIterator implements Iterator<TaskNode>{
+    public class LinkedTaskListIterator implements Iterator<Task>{
         private TaskNode actualNode = new TaskNode(null, null, null);
 
         @Override
@@ -144,10 +144,10 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Iterable<T
         }
 
         @Override
-        public TaskNode next() {
+        public Task next() {
             if(actualNode.equals(new TaskNode(null,null,null))){actualNode = firstNode; }
             else{actualNode = actualNode.getRight();}
-            return actualNode;
+            return actualNode.getTask();
         }
 
         @Override
