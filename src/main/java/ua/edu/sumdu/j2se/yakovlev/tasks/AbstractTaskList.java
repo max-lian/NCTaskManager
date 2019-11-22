@@ -1,6 +1,6 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
-public abstract class AbstractTaskList {
+public abstract class AbstractTaskList<Object> {
     private int lenght;
 
     public abstract void add(Task task);

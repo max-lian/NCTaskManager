@@ -1,6 +1,8 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
-public class LinkedTaskList extends AbstractTaskList {
+import java.util.Iterator;
+
+public class LinkedTaskList extends AbstractTaskList<TaskNode> implements Iterable<TaskNode>{
     private TaskNode firstNode;
     private TaskNode lastNode;
 
@@ -80,5 +82,10 @@ public class LinkedTaskList extends AbstractTaskList {
             System.out.println(listTask.getTask().toString());
             listTask = listTask.getRight();
         }
+    }
+
+    @Override
+    public Iterator<TaskNode> iterator() {
+        return null;
     }
 }

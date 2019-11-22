@@ -11,27 +11,27 @@ public class TaskNode {
         this.right = right;
     }
 
-    public Task getTask() {
+    protected Task getTask() {
         return task;
     }
 
-    public void setTask(Task task) {
+    protected void setTask(Task task) {
         this.task = task;
     }
 
-    public TaskNode getLeft() {
+    protected TaskNode getLeft() {
         return left;
     }
 
-    public void setLeft(TaskNode left) {
+    protected void setLeft(TaskNode left) {
         this.left = left;
     }
 
-    public TaskNode getRight() {
+    protected TaskNode getRight() {
         return right;
     }
 
-    public void setRight(TaskNode right) {
+    protected void setRight(TaskNode right) {
         this.right = right;
     }
 }

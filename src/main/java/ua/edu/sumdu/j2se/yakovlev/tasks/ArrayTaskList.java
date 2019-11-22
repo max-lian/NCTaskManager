@@ -1,5 +1,7 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
+import java.util.Iterator;
+
 /**
  * Класс продукции со свойствами
  * <b>maker</b> и <b>price</b>.
@@ -7,7 +9,7 @@ package ua.edu.sumdu.j2se.yakovlev.tasks;
  * @version 2.1
  */
 
-public class ArrayTaskList extends AbstractTaskList {
+public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Task> {
     /** Поле массив задач */
     private Task[] taskArray;
 
@@ -16,6 +18,11 @@ public class ArrayTaskList extends AbstractTaskList {
      */
     public ArrayTaskList() {
         taskArray = new Task[0];
+    }
+
+    public ArrayTaskList(Task[] taskArray){
+        this.taskArray = taskArray;
+        setLenght(taskArray.length);
     }
 
     /**
@@ -80,6 +87,9 @@ public class ArrayTaskList extends AbstractTaskList {
         return flag;
     }
 
+    public boolean remove(int i) {
+        return makeArraySmoller(i);
+    }
     /**
      * Метод для получения задачи по индексу
      * @param index - индекс задачи
@@ -96,5 +106,10 @@ public class ArrayTaskList extends AbstractTaskList {
     @Override
     public AbstractTaskList createList() {
         return new ArrayTaskList();
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return new ArrayTaskListIterator(taskArray, getLenght());
     }
 }
