@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Iterator;
  * @version 2.1
  */
 
-public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Task> {
+public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Task>, Cloneable {
     /** Поле массив задач */
     private Task[] taskArray;
 
@@ -110,6 +111,50 @@ public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Ta
 
     @Override
     public Iterator<Task> iterator() {
-        return new ArrayTaskListIterator(taskArray, getLenght());
+        return new ArrayTaskListIterator();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArrayTaskList tasks = (ArrayTaskList) o;
+        return Arrays.equals(taskArray, tasks.taskArray);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(taskArray);
+    }
+
+    @Override
+    public String toString() {
+        return "ArrayTaskList{" +
+                "taskArray=" + Arrays.toString(taskArray) +
+                '}';
+    }
+
+    public ArrayTaskList clone() throws CloneNotSupportedException {
+        return (ArrayTaskList) super.clone();
+    }
+
+    public class ArrayTaskListIterator implements Iterator<Task> {
+        private int count = 0;
+
+        @Override
+        public boolean hasNext() {
+            return count < getLenght() - 1;
+        }
+
+        @Override
+        public Task next() {
+            count++;
+            return getTask(count - 1);
+        }
+
+        @Override
+        public void remove() {
+            makeArraySmoller(count);
+        }
     }
 }
