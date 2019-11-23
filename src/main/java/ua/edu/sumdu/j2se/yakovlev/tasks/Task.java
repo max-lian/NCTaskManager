@@ -2,7 +2,7 @@ package ua.edu.sumdu.j2se.yakovlev.tasks;
 
 import java.util.Objects;
 
-public class Task{
+public class Task implements Cloneable{
     private String title;
     private int time;
     private int interval;
@@ -170,4 +170,9 @@ public class Task{
                 ", active=" + active +
                 '}';
     }
+
+    public Task clone() throws CloneNotSupportedException {
+        return (Task) super.clone();
+    }
+
 }

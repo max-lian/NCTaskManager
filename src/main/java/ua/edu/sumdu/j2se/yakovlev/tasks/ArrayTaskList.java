@@ -35,6 +35,7 @@ public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Ta
             newTaskArray[i] = taskArray[i];
         }
         taskArray = newTaskArray;
+        setLenght(getLenght() + 1);
     }
 
     /**
@@ -53,6 +54,7 @@ public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Ta
             }
         }
         taskArray = newTaskArray;
+        setLenght(getLenght() - 1);
         return true;
     }
 
@@ -65,7 +67,6 @@ public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Ta
      */
     public void add(Task task){
         makeArrayBigger();
-        setLenght(getLenght() + 1);;
         taskArray[getLenght() - 1] = task;
     }
 
@@ -81,7 +82,6 @@ public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Ta
         for (int i = 0; i < getLenght(); i++){
             if (taskArray[i].equals(task)){
                 flag = makeArraySmoller( i );
-                setLenght(getLenght() - 1);;
                 break;
             }
         }
@@ -139,22 +139,24 @@ public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Ta
     }
 
     public class ArrayTaskListIterator implements Iterator<Task> {
-        private int count = 0;
+        private int count = -1;
 
         @Override
         public boolean hasNext() {
-            return count < getLenght() - 1;
+            return count < getLenght() - 1 ;
         }
 
         @Override
         public Task next() {
             count++;
-            return getTask(count - 1);
+            return getTask(count);
         }
 
         @Override
-        public void remove() {
+        public void remove() throws IllegalStateException {
+            if(count == -1) throw new IllegalStateException("Can't remove until next");
             makeArraySmoller(count);
+            count--;
         }
     }
 }

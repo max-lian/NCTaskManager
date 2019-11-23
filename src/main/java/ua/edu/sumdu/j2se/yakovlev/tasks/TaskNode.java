@@ -43,8 +43,8 @@ public class TaskNode {
         if (o == null || getClass() != o.getClass()) return false;
         TaskNode taskNode = (TaskNode) o;
         return Objects.equals(task, taskNode.task) &&
-                Objects.equals(left, taskNode.left) &&
-                Objects.equals(right, taskNode.right);
+                left == left &&
+                right == right;
     }
 
     @Override

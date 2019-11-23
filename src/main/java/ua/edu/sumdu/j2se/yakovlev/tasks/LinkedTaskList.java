@@ -40,6 +40,11 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
     }
 
     public boolean remove(TaskNode task){
+        if(firstNode == lastNode){
+            setLenght(0);
+            firstNode = lastNode = null;
+            return true;
+        }
         if(task.getLeft() != null) {
             task.getLeft().setRight(task.getRight());
         }
@@ -101,6 +106,10 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LinkedTaskList that = (LinkedTaskList) o;
+        if (that.getLenght() == 0 && getLenght() == 0) return true;
+        System.out.println(!that.firstNode.equals(firstNode));
+        System.out.println(!that.lastNode.equals(lastNode));
+        System.out.println(getLenght() != that.getLenght());
         if (!that.firstNode.equals(firstNode) || !that.lastNode.equals(lastNode)|| getLenght() != that.getLenght()){
             return false;
         }
@@ -151,7 +160,8 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
         }
 
         @Override
-        public void remove() {
+        public void remove() throws IllegalStateException {
+            if(actualNode.equals(new TaskNode(null,null,null))) throw new IllegalStateException("Can't remove until next");
             LinkedTaskList.this.remove(actualNode);
         }
     }

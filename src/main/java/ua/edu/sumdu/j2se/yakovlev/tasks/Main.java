@@ -1,24 +1,37 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.stream.IntStream;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Task[] tasks = new Task[3];
-		tasks[0] = new Task("A", 5);
-		tasks[1] = new Task("B", 10);
-		tasks[2] = new Task("C", 15);
-	    LinkedTaskList linkedTaskList = new LinkedTaskList();
-		linkedTaskList.add(tasks[0]);
-		linkedTaskList.add(tasks[1]);
-		linkedTaskList.add(tasks[2]);
-		try {
-			LinkedTaskList copyLinkedList = linkedTaskList.clone();
-			System.out.println(copyLinkedList.toString());
-		}
-		catch (CloneNotSupportedException ex){
-			System.out.println("Не могу клонировать");
-		}
+		LinkedTaskList a = createA();
+		LinkedTaskList b = createB();
+		modify(a);
+		modify(b);
+		System.out.println(a.equals(b));
+	}
+
+	private static LinkedTaskList createA() {
+		LinkedTaskList list = new LinkedTaskList();
+		Task A = new Task("A", 10);
+		IntStream.range(0, 10).forEach(i -> list.add(A));
+		return list;
+	}
+
+	private static LinkedTaskList createB() {
+		LinkedTaskList list = new LinkedTaskList();
+		Task B = new Task("B", 15);
+		IntStream.range(0, 10).forEach(i -> list.add(B));
+		return list;
+	}
+
+	private static void modify(LinkedTaskList list) {
+		IntStream.range(0, list.size()).mapToObj(i -> list.getTask(0)).forEach(list::remove);
+		Task A = new Task("A", 10);
+		IntStream.range(0, 10).forEach(i -> list.add(A));
 	}
 }
