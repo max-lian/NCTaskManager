@@ -7,12 +7,11 @@ import java.util.stream.IntStream;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CloneNotSupportedException {
 		LinkedTaskList a = createA();
-		LinkedTaskList b = createB();
-		modify(a);
-		modify(b);
-		System.out.println(a.equals(b));
+		LinkedTaskList b = a.clone();
+		System.out.println(a.toString());
+		System.out.println(b.toString());
 	}
 
 	private static LinkedTaskList createA() {

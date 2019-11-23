@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="com.netcracker.eductr.tasks.tests.T3_LinkedTest" time="0.012" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="com.netcracker.eductr.tasks.tests.T3_LinkedTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="12.0.2+10"/>
@@ -40,12 +40,12 @@
     <property name="user.timezone" value="Europe/Kiev"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="12"/>
+    <property name="idea.version2019.2.4" value="true"/>
     <property name="user.name" value="Max"/>
-    <property name="idea.version2019.2.3" value="true"/>
     <property name="java.class.path" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2019.2.2\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="12"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version2019.2.3 test"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version2019.2.4 test"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-12.0.2"/>
     <property name="user.language" value="ru"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -65,5 +65,5 @@
   <testcase classname="com.netcracker.eductr.tasks.tests.T3_LinkedTest" name="part1_testSizeAddGet" time="0"/>
   <testcase classname="com.netcracker.eductr.tasks.tests.T3_LinkedTest" name="part2_testRemove" time="0"/>
   <testcase classname="com.netcracker.eductr.tasks.tests.T3_LinkedTest" name="part3_testIncomingInactive" time="0"/>
-  <testcase classname="com.netcracker.eductr.tasks.tests.T3_LinkedTest" name="part4_testIncoming" time="0.012"/>
+  <testcase classname="com.netcracker.eductr.tasks.tests.T3_LinkedTest" name="part4_testIncoming" time="0"/>
 </testsuite>

@@ -146,7 +146,7 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
 
         @Override
         public boolean hasNext() {
-            if(actualNode.equals(lastNode)){
+            if(actualNode == lastNode){
                 return false;
             }
             return true;
