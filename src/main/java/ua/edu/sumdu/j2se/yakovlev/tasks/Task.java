@@ -1,29 +1,25 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task implements Cloneable{
     private String title;
-    private int time;
-    private int interval;
-    private int start;
-    private int end;
+    private LocalDateTime time;
+    private LocalDateTime interval;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private boolean repeat;
     private boolean active = false;
 
-    public Task(String title, int time) throws IllegalArgumentException {
-        if(time < 0){
-            throw new IllegalArgumentException();
-        }
+    public Task(String title, LocalDateTime time) throws IllegalArgumentException {
         this.title = title;
         this.time = time;
         repeat = false;
     }
 
-    public Task(String title, int start, int end, int interval) throws IllegalArgumentException {
-        if(start < 0 || end < 0 || interval <= 0 ){
-            throw new IllegalArgumentException();
-        }
+    public Task(String title, LocalDateTime start, LocalDateTime end, LocalDateTime interval) throws IllegalArgumentException {
         this.title = title;
         this.interval = interval;
         this.start = start;
@@ -47,7 +43,7 @@ public class Task implements Cloneable{
         this.active = active;
     }
 
-    public int getTime() {
+    public LocalDateTime getTime() {
         if (repeat) {
             return start;
         }
@@ -56,15 +52,12 @@ public class Task implements Cloneable{
         }
     }
 
-    public void setTime(int time) throws IllegalArgumentException{
-        if(time < 0){
-            throw new IllegalArgumentException();
-        }
+    public void setTime(LocalDateTime time) throws IllegalArgumentException{
         repeat = false;
         this.time = time;
     }
 
-    public int getStartTime() {
+    public LocalDateTime getStartTime() {
         if (repeat) {
             return start;
         }
@@ -73,7 +66,7 @@ public class Task implements Cloneable{
         }
     }
 
-    public int getEndTime() {
+    public LocalDateTime getEndTime() {
         if (repeat) {
             return end;
         }
@@ -82,31 +75,27 @@ public class Task implements Cloneable{
         }
     }
 
-    public int getRepeatInterval() {
+    public LocalDateTime getRepeatInterval() {
         if (repeat) {
             return interval;
         }
         else {
-            return 0;
+            return null;
         }
     }
 
-    public void setTime(int start, int end, int interval) throws IllegalArgumentException {
-        if(start < 0 || end < 0 || interval <= 0 ){
-            throw new IllegalArgumentException();
-        }
+    public void setTime(LocalDateTime start, LocalDateTime end, LocalDateTime interval) throws IllegalArgumentException {
         repeat = true;
         this.start = start;
         this.end = end;
         this.interval = interval;
-        this.time = 0;
     }
 
     public boolean isRepeated() {
         return repeat;
     }
 
-    public int nextTimeAfter(int current) {
+/*    public int nextTimeAfter(int current) {
         if(!active){
             return -1;
         }
@@ -137,6 +126,42 @@ public class Task implements Cloneable{
                 return -1;
             }
         }
+    }*/
+
+    public LocalDateTime nextTimeAfter(LocalDateTime current){
+        if(!active){
+            return null;
+        }
+        if (repeat) {
+            if(current.isBefore(start) ){
+                return start;
+            }
+            if(current.isAfter(end)|| current.equals(end)){
+                return null;
+            }
+            else{
+                LocalDateTime temp = start;
+                while (temp.isBefore(current) || temp.equals(current)){
+                    temp.plusDays(interval.getDayOfMonth());
+                    temp.plusYears(interval.getYear());
+                    temp.plusMonths(interval.getMonthValue());
+                    temp.plusHours(interval.getHour());
+                    temp.plusMinutes(interval.getMinute());
+                    temp.plusSeconds(interval.getSecond());
+                    temp.plusNanos(interval.getNano());
+                }
+                if(end.isBefore(temp) || end.isEqual(temp)) return temp;
+                else return null;
+            }
+        }
+        else{
+            if(time.isAfter(current)){
+                return time;
+            }
+            else{
+                return null;
+            }
+        }
     }
 
     @Override
@@ -144,13 +169,21 @@ public class Task implements Cloneable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return time == task.time &&
-                interval == task.interval &&
-                start == task.start &&
-                end == task.end &&
-                repeat == task.repeat &&
-                active == task.active &&
-                Objects.equals(title, task.title);
+        if(repeat != task.repeat) return false;
+        else{
+            if (repeat){
+                return interval == task.interval &&
+                        start == task.start &&
+                        end == task.end &&
+                        active == task.active &&
+                        Objects.equals(title, task.title);
+            }
+            else{
+                return time == task.time &&
+                        active == task.active &&
+                        Objects.equals(title, task.title);
+            }
+        }
     }
 
     @Override
@@ -174,5 +207,4 @@ public class Task implements Cloneable{
     public Task clone() throws CloneNotSupportedException {
         return (Task) super.clone();
     }
-
 }

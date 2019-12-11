@@ -9,4 +9,10 @@ public class TaskListFactory {
             return new LinkedTaskList();
         }
     }
+
+    public static AbstractTaskList createSameTaskList(Iterable<Task> tasks){
+        Class cls = tasks.getClass();
+        if(cls.getSimpleName().equals("LinkedTaskList")) return new LinkedTaskList();
+        else return new ArrayTaskList();
+    }
 }

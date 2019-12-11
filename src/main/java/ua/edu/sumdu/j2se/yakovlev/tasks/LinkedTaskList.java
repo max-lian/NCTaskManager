@@ -1,8 +1,7 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.function.Function;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
     private TaskNode firstNode;
@@ -73,8 +72,12 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
     }
 
     @Override
-    public AbstractTaskList createList() {
-        return new LinkedTaskList();
+    public Stream<Task> getStream() {
+        LinkedList<Task> stream = new LinkedList<Task>();
+        for (Task a: this) {
+            stream.add(a);
+        }
+        return stream.stream();
     }
 
     public void printList(){
@@ -120,16 +123,6 @@ public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
         }
         return true;
     }
-
-/*    @Override
-    public LinkedTaskList clone(){
-        LinkedTaskList newList = new LinkedTaskList();
-        LinkedTaskListIterator thisIterator = (LinkedTaskListIterator) iterator();
-        for(TaskNode task : this){
-            newList.add(thisIterator.next().getTask());
-        }
-        return newList;
-    }*/
 
     public LinkedTaskList clone() throws CloneNotSupportedException {
         return (LinkedTaskList) super.clone();

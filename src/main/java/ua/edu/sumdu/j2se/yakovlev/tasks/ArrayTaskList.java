@@ -1,7 +1,10 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 /**
  * Класс продукции со свойствами
@@ -105,8 +108,12 @@ public class ArrayTaskList extends AbstractTaskList<Task> implements Iterable<Ta
     }
 
     @Override
-    public AbstractTaskList createList() {
-        return new ArrayTaskList();
+    public Stream<Task> getStream() {
+       ArrayList<Task> stream = new ArrayList<Task>();
+        for (Task a: this) {
+            stream.add(a);
+        }
+        return stream.stream();
     }
 
     @Override

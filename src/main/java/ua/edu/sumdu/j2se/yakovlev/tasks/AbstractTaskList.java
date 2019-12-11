@@ -1,17 +1,15 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 public abstract class AbstractTaskList<Object> implements Iterable<Task>{
     private int lenght;
-
     public abstract void add(Task task);
-
     public abstract boolean remove(Task task);
-
     public abstract Task getTask(int index);
-
-    public abstract AbstractTaskList createList();
+    public abstract Stream<Task> getStream();
 
     public int getLenght() {
         return lenght;
@@ -25,7 +23,7 @@ public abstract class AbstractTaskList<Object> implements Iterable<Task>{
         return  lenght;
     }
 
-    public AbstractTaskList incoming(int from, int to){
+    /*public final AbstractTaskList incoming(int from, int to){
         AbstractTaskList fromTo = createList();
         Iterator<Task> iterator = (Iterator<Task>) iterator();
         while(iterator.hasNext()){
@@ -35,5 +33,5 @@ public abstract class AbstractTaskList<Object> implements Iterable<Task>{
             }
         }
         return fromTo;
-    }
+    }*/
 }
