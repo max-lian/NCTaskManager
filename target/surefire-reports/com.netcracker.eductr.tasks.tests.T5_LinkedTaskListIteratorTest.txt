@@ -1,4 +1,32 @@
 -------------------------------------------------------------------------------
 Test set: com.netcracker.eductr.tasks.tests.T5_LinkedTaskListIteratorTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
+part1_testIteration(com.netcracker.eductr.tasks.tests.T5_LinkedTaskListIteratorTest)  Time elapsed: 0.001 sec  <<< ERROR!
+java.lang.ClassCastException: class java.lang.Long cannot be cast to class java.lang.Integer (java.lang.Long and java.lang.Integer are in module java.base of loader 'bootstrap')
+	at com.netcracker.eductr.tasks.tests.model.Task.getRepeatInterval(Task.java:82)
+	at com.netcracker.eductr.tasks.tests.utils.TaskListUtils.lambda$describeTasks$1(TaskListUtils.java:22)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Collections$2.tryAdvance(Collections.java:4747)
+	at java.base/java.util.Collections$2.forEachRemaining(Collections.java:4755)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.netcracker.eductr.tasks.tests.utils.TaskListUtils.describeTasks(TaskListUtils.java:25)
+	at com.netcracker.eductr.tasks.tests.utils.TaskUtil.describeTask(TaskUtil.java:11)
+	at com.netcracker.eductr.tasks.tests.T5_LinkedTaskListIteratorTest.part1_testIteration(T5_LinkedTaskListIteratorTest.java:35)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:298)
+	at org.junit.internal.runners.statements.FailOnTimeout$CallableStatement.call(FailOnTimeout.java:292)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+

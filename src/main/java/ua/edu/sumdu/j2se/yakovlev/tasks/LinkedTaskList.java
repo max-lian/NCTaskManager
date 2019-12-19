@@ -3,7 +3,7 @@ package ua.edu.sumdu.j2se.yakovlev.tasks;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class LinkedTaskList extends AbstractTaskList<Task> implements Cloneable{
+public class LinkedTaskList extends AbstractTaskList<Task> implements Iterable<Task>, Cloneable{
     private TaskNode firstNode;
     private TaskNode lastNode;
 

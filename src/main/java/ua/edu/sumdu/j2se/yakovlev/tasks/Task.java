@@ -1,31 +1,53 @@
 package ua.edu.sumdu.j2se.yakovlev.tasks;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Task implements Cloneable{
+public class Task implements Cloneable, Serializable {
     private String title;
     private LocalDateTime time;
-    private LocalDateTime interval;
+    private int interval;
     private LocalDateTime start;
     private LocalDateTime end;
     private boolean repeat;
     private boolean active = false;
 
     public Task(String title, LocalDateTime time) throws IllegalArgumentException {
+        if(time == null) throw new IllegalArgumentException();
         this.title = title;
         this.time = time;
         repeat = false;
     }
 
-    public Task(String title, LocalDateTime start, LocalDateTime end, LocalDateTime interval) throws IllegalArgumentException {
+    public Task(Task oldTask) {
+        this.title = oldTask.getTitle();
+        this.time = oldTask.getTime();
+        this.interval = oldTask.getRepeatInterval();
+        this.start = oldTask.getStartTime();
+        this.end = oldTask.getEndTime();
+        this.repeat = oldTask.isRepeated();
+        this.active = oldTask.isActive();
+    }
+
+    public Task(String title, LocalDateTime start, LocalDateTime end, int interval) throws IllegalArgumentException {
+        if(start == null || end == null || interval <= 0) throw new IllegalArgumentException();
         this.title = title;
         this.interval = interval;
         this.start = start;
         this.end = end;
         repeat = true;
     }
+
+ /*   public Task(String title, LocalDateTime start, LocalDateTime end, int interval, boolean active) throws IllegalArgumentException {
+        this.title = title;
+        this.interval = interval;
+        this.start = start;
+        this.end = end;
+        repeat = true;
+        this.active = active;
+    }*/
 
     public String getTitle() {
         return title;
@@ -75,16 +97,16 @@ public class Task implements Cloneable{
         }
     }
 
-    public LocalDateTime getRepeatInterval() {
+    public int getRepeatInterval() {
         if (repeat) {
             return interval;
         }
         else {
-            return null;
+            return 0;
         }
     }
 
-    public void setTime(LocalDateTime start, LocalDateTime end, LocalDateTime interval) throws IllegalArgumentException {
+    public void setTime(LocalDateTime start, LocalDateTime end, int interval) throws IllegalArgumentException {
         repeat = true;
         this.start = start;
         this.end = end;
@@ -136,21 +158,15 @@ public class Task implements Cloneable{
             if(current.isBefore(start) ){
                 return start;
             }
-            if(current.isAfter(end)|| current.equals(end)){
+            if(current.isAfter(end)){
                 return null;
             }
             else{
-                LocalDateTime temp = start;
+                LocalDateTime temp = start.plusSeconds(0);
                 while (temp.isBefore(current) || temp.equals(current)){
-                    temp.plusDays(interval.getDayOfMonth());
-                    temp.plusYears(interval.getYear());
-                    temp.plusMonths(interval.getMonthValue());
-                    temp.plusHours(interval.getHour());
-                    temp.plusMinutes(interval.getMinute());
-                    temp.plusSeconds(interval.getSecond());
-                    temp.plusNanos(interval.getNano());
+                    temp = temp.plusSeconds(interval);
                 }
-                if(end.isBefore(temp) || end.isEqual(temp)) return temp;
+                if(end.isAfter(temp) || end.isEqual(temp)) return temp;
                 else return null;
             }
         }
@@ -173,13 +189,13 @@ public class Task implements Cloneable{
         else{
             if (repeat){
                 return interval == task.interval &&
-                        start == task.start &&
-                        end == task.end &&
+                        start.equals( task.start) &&
+                        end.equals(task.end) &&
                         active == task.active &&
                         Objects.equals(title, task.title);
             }
             else{
-                return time == task.time &&
+                return time.equals(task.time) &&
                         active == task.active &&
                         Objects.equals(title, task.title);
             }
