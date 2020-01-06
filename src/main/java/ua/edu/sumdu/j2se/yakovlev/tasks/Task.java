@@ -14,6 +14,10 @@ public class Task implements Cloneable, Serializable {
     private boolean repeat;
     private boolean active = false;
 
+    public Task(){
+
+    }
+
     public Task(String title, LocalDateTime time) throws IllegalArgumentException {
         if(time == null) throw new IllegalArgumentException();
         this.title = title;
@@ -116,39 +120,6 @@ public class Task implements Cloneable, Serializable {
     public boolean isRepeated() {
         return repeat;
     }
-
-/*    public int nextTimeAfter(int current) {
-        if(!active){
-            return -1;
-        }
-        if (repeat) {
-            if(start > current) {
-                return start;
-            }
-            if (end <= current)
-                return -1;
-            else{
-                int reptime = start;
-                while(reptime <= current) {
-                    reptime += interval;
-                }
-                if(reptime <= end) {
-                    return reptime;
-                }
-                else{
-                    return -1;
-                }
-            }
-        }
-        else {
-            if (time > current) {
-                return time;
-            }
-            else {
-                return -1;
-            }
-        }
-    }*/
 
     public LocalDateTime nextTimeAfter(LocalDateTime current){
         if(!active){
